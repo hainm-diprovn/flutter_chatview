@@ -308,6 +308,11 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                   ?.senderNameTextStyle,
             ),
           ),
+        Text(
+          widget.message.createdAt.getTimeFromDateTime,
+          style: widget.messageTimeTextStyle ?? const TextStyle(fontSize: 12),
+        ),
+        const SizedBox(height: 4),
         if (replyMessage.isNotEmpty)
           widget.repliedMessageConfig?.repliedMessageWidgetBuilder != null
               ? widget.repliedMessageConfig!

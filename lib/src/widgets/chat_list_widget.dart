@@ -186,6 +186,7 @@ class _ChatListWidgetState extends State<ChatListWidget>
             valueListenable: showPopUp,
             builder: (_, showPopupValue, child) {
               return Stack(
+                fit: StackFit.expand,
                 children: [
                   ChatGroupedListWidget(
                     showPopUp: showPopupValue,

@@ -67,7 +67,6 @@ class TextMessageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final textMessage = message.message;
     return Stack(
       clipBehavior: Clip.none,
@@ -93,14 +92,7 @@ class TextMessageView extends StatelessWidget {
                   linkPreviewConfig: _linkPreviewConfig,
                   url: textMessage,
                 )
-              : Text(
-                  textMessage,
-                  style: _textStyle ??
-                      textTheme.bodyMedium!.copyWith(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                ),
+              : textWithHighlightPrice(context, textMessage),
         ),
         if (message.reaction.reactions.isNotEmpty)
           ReactionWidget(
@@ -111,6 +103,48 @@ class TextMessageView extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  Widget textWithHighlightPrice(BuildContext context, String text) {
+    final textTheme = Theme.of(context).textTheme;
+    final ts = _textStyle ??
+        textTheme.bodyMedium!.copyWith(
+          color: Colors.white,
+          fontSize: 16,
+        );
+    RegExp regExp = RegExp(
+        r'(¥|\$|€|£)(\d{1,3}(,\d{3})*|\d+)(\.\d+)?|(\d{1,3}(,\d{3})*|\d+)(\.\d+)?(¥|\$|€|£)');
+
+    Iterable<RegExpMatch> matches = regExp.allMatches(text);
+
+    if (matches.isNotEmpty) {
+      List<TextSpan> children = [];
+      int start = 0;
+      for (RegExpMatch match in matches) {
+        String? price = match.group(0);
+        int startIndex = match.start;
+        int endIndex = match.end;
+        children.add(TextSpan(
+          text: text.substring(start, startIndex),
+          style: ts,
+        ));
+        children.add(TextSpan(
+          text: price,
+          style: ts.copyWith(color: const Color.fromRGBO(62, 139, 246, 1)),
+        ));
+        start = endIndex;
+      }
+      children.add(TextSpan(
+        text: text.substring(start),
+        style: ts,
+      ));
+
+      return RichText(
+        text: TextSpan(children: children),
+      );
+    } else {
+      return Text(text);
+    }
   }
 
   EdgeInsetsGeometry? get _padding => isMessageBySender
