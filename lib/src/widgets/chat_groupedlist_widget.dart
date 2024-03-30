@@ -167,6 +167,8 @@ class _ChatGroupedListWidgetState extends State<ChatGroupedListWidget>
       controller: widget.scrollController,
       child: Column(
         children: [
+          if (chatBackgroundConfig.topWidget != null)
+            chatBackgroundConfig.topWidget!,
           GestureDetector(
             onHorizontalDragUpdate: (details) => isEnableSwipeToSeeTime
                 ? showPopUp
@@ -206,10 +208,11 @@ class _ChatGroupedListWidgetState extends State<ChatGroupedListWidget>
                         showIndicator: value,
                         profilePic: profileCircleConfig?.profileImageUrl,
                       )),
-          SizedBox(
-            height: MediaQuery.of(context).size.width *
-                (widget.replyMessage.message.isNotEmpty ? 0.3 : 0.14),
-          ),
+          if (featureActiveConfig?.enableTextField == true)
+            SizedBox(
+              height: MediaQuery.of(context).size.width *
+                  (widget.replyMessage.message.isNotEmpty ? 0.3 : 0.14),
+            ),
         ],
       ),
     );

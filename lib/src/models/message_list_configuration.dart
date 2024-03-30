@@ -66,6 +66,8 @@ class ChatBackgroundConfiguration {
   /// Used for giving widget while data is loading.
   final Widget? loadingWidget;
 
+  final Widget? topWidget;
+
   /// Used to give curve of animation which runes while user swipe to see time of
   /// message.
   final Curve messageTimeAnimationCurve;
@@ -85,6 +87,7 @@ class ChatBackgroundConfiguration {
     this.messageTimeIconColor,
     this.loadingWidget,
     this.messageTimeAnimationCurve = Curves.decelerate,
+    this.topWidget
   });
 }
 
