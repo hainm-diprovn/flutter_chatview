@@ -28,6 +28,7 @@ class ProfileCircleConfiguration {
   final EdgeInsetsGeometry? padding;
 
   /// Provides image url of user
+  final Widget? placeholderImage;
   final String? profileImageUrl;
 
   /// Used for give bottom padding to profile circle
@@ -49,5 +50,6 @@ class ProfileCircleConfiguration {
     this.bottomPadding,
     this.circleRadius,
     this.onAvatarLongPress,
+    this.placeholderImage,
   });
 }

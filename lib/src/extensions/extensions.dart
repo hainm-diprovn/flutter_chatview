@@ -68,7 +68,11 @@ extension ValidateString on String {
     return true;
   }
 
-  bool get isUrl => Uri.tryParse(this)?.isAbsolute ?? false;
+  bool get isUrl {
+    const urlRegex =
+        r'(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})';
+    return RegExp(urlRegex).hasMatch(this);
+  }
 
   Widget getUserProfilePicture({
     required ChatUser? Function(String) getChatUser,
@@ -95,6 +99,8 @@ extension MessageTypes on MessageType {
   bool get isVoice => this == MessageType.voice;
 
   bool get isCustom => this == MessageType.custom;
+
+  bool get isAlert => this == MessageType.alert;
 }
 
 /// Extension on ConnectionState for checking specific connection.

@@ -32,12 +32,16 @@ class Message {
 
   /// Provides actual message it will be text or image/audio file path.
   final String message;
+  final String? note;
 
   /// Provides message created date time.
   final DateTime createdAt;
 
   /// Provides id of sender of message.
   final String sendBy;
+
+  final String name;
+  final String profilePhoto;
 
   /// Provides reply message if user triggers any reply on any message.
   final ReplyMessage replyMessage;
@@ -59,11 +63,14 @@ class Message {
     required this.message,
     required this.createdAt,
     required this.sendBy,
+    this.name = '',
+    this.profilePhoto = '',
     this.replyMessage = const ReplyMessage(),
     Reaction? reaction,
     this.messageType = MessageType.text,
     this.voiceMessageDuration,
     MessageStatus status = MessageStatus.pending,
+    this.note,
   })  : reaction = reaction ?? Reaction(reactions: [], reactedUserIds: []),
         key = GlobalKey(),
         _status = ValueNotifier(status),

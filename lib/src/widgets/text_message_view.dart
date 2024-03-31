@@ -113,7 +113,7 @@ class TextMessageView extends StatelessWidget {
           fontSize: 16,
         );
     RegExp regExp = RegExp(
-        r'(¥|\$|€|£)(\d{1,3}(,\d{3})*|\d+)(\.\d+)?|(\d{1,3}(,\d{3})*|\d+)(\.\d+)?(¥|\$|€|£)');
+        r'(¥|\$|€|£) (\d{1,3}(,\d{3})*|\d+)(\.\d+)?|(\d{1,3}(,\d{3})*|\d+)(\.\d+)? (¥|\$|€|£)');
 
     Iterable<RegExpMatch> matches = regExp.allMatches(text);
 
