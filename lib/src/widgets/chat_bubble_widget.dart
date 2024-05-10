@@ -340,9 +340,14 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
       crossAxisAlignment:
           isMessageBySender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.message.createdAt.getTimeFromDateTime,
-          style: widget.messageTimeTextStyle ?? const TextStyle(fontSize: 12),
+        Padding(
+          padding: isMessageBySender
+              ? const EdgeInsets.only(right: 8.0)
+              : const EdgeInsets.only(left: 8.0),
+          child: Text(
+            widget.message.createdAt.getTimeFromDateTime,
+            style: widget.messageTimeTextStyle ?? const TextStyle(fontSize: 12),
+          ),
         ),
         const SizedBox(height: 4),
         if (replyMessage.isNotEmpty)
