@@ -97,15 +97,6 @@ class Message {
     _status.value = messageStatus;
   }
 
-  Message copyWith({String? message}) {
-    return Message(
-      id: id,
-      message: message ?? this.message,
-      createdAt: createdAt,
-      sendBy: sendBy,
-    );
-  }
-
   factory Message.fromJson(Map<String, dynamic> json) => Message(
       id: json["id"],
       message: json["message"],
