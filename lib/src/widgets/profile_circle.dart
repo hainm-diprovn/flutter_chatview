@@ -63,7 +63,7 @@ class ProfileCircle extends StatelessWidget {
         onTap: onTap,
         child: CircleAvatar(
           radius: circleRadius ?? 16,
-          foregroundImage: NetworkImage(imageUrl ?? ""),
+          foregroundImage: imageUrl != "" ? NetworkImage(imageUrl ?? "") : null,
           child: placeholderImage,
         ),
       ),
